@@ -1,0 +1,238 @@
+header {
+    z-index: 19;
+  
+  
+    -webkit-user-select: none;
+    /* Chrome all / Safari all */
+    -moz-user-select: none;
+    /* Firefox all */
+    -ms-user-select: none;
+    /* IE 10+ */
+    user-select: none;
+    /* Likely future */
+  
+    box-shadow: 0px 1px 25px -1px var(--color-shadow);
+    -webkit-box-shadow: 0px 1px 25px -1px var(--color-shadow);
+    -moz-box-shadow: 0px 1px 25px -1px var(--color-shadow);
+  }
+  
+  
+  
+  nav {
+    width: 100vw;
+  }
+  
+  nav li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  a{
+    padding: 0.1rem 0.3rem 0.5rem 0.3rem;
+    height: 100%;
+  }
+  
+  nav a.router-link-exact-active {
+    color: var(--color-primary);
+  }
+  
+  nav a.router-link-exact-active:hover {
+    background-color: transparent;
+    color: var(--color-primary);
+  }
+  
+  :is(#menu, footer) a:hover {
+    color: var(--color-primary);
+  }
+  
+  
+  #menuToggleDiv {
+    top: 1.3rem;
+    left: 1.2rem;
+    position: absolute;
+    z-index: 22;
+  }
+  
+  
+  
+  
+  
+  #menuToggle span {
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+  
+    background: var(--color-text);
+  
+    border-radius: 3px;
+  
+    z-index: 21;
+  
+    transform-origin: 4px 0px;
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+      background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+  }
+  
+  
+  
+  
+  #menu {
+    z-index: 20;
+  
+    display: flex;
+    /* flex-direction: row; */
+    flex-direction: column;
+    /* align-items: center; */
+  
+    position: absolute;
+  
+    margin: 0;
+    width: 100vw;
+  
+    background-color: var(--color-background);
+  
+  }
+  
+  
+  @media (prefers-color-scheme: dark) {
+    :is(#menu, nav) {
+      background-color: var(--color-background-mute);
+    }
+  }
+  
+  
+  /* mobile S */
+  @media (min-width: 600px) {
+    #menu {
+      align-items: center;
+    }
+  }
+  
+  
+  /* mobile */
+  @media (max-width: 1024px) {
+    nav {
+      height: 4rem;
+    }
+  
+    #menu {
+      /* padding: 6rem var(--space-small); */
+      padding: 5rem 1.2rem;
+      height: 100vh;
+      gap: 2rem;
+      font-size: 1.3em;
+    }
+  
+    .menuClosed {
+      transform-origin: 0% 0%;
+      transform: translate(-100%, 0);
+      transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+    }
+  
+    .menuOpen {
+      transform-origin: 0% 0%;
+      transform: translate(0%, 0);
+  
+      transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+    }
+  
+  }
+  
+  
+  
+  
+  /* desktop */
+  @media (min-width: 1024px) {
+    #menu {
+      flex-direction: row;
+      justify-content: end;
+      /* padding: 1rem 5rem; */
+      padding: 1.5rem 5rem 1rem 1.2rem;
+      height: 4rem;
+      gap: 2rem;
+    }
+  
+    nav {
+      margin-bottom: 4rem;
+    }
+  
+    #menuToggleDiv {
+      opacity: 0;
+      transform: scale(0, 0);
+    }
+  }
+  
+  
+  @supports (--custom: property) {
+    [style*="--aspect-ratio"] {
+      position: relative;
+    }
+  
+    [style*="--aspect-ratio"]::before {
+      content: "";
+      display: block;
+      padding-bottom: calc(100% / (var(--aspect-ratio)));
+    }
+  
+    [style*="--aspect-ratio"]> :first-child {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+    }
+  }
+  
+  
+  
+  
+  #menuToggleDiv input {
+    z-index: 23;
+    position: absolute;
+    display: block;
+    width: 40px;
+    height: 32px;
+    opacity: 0;
+  
+    cursor: pointer;
+  
+    top: -7px;
+    left: -5px;
+  }
+  
+  
+  #menuToggle span:first-child {
+    transform-origin: 0% 0%;
+  }
+  
+  #menuToggle span:nth-last-child(2) {
+    transform-origin: 0% 100%;
+  }
+  
+  /* Transform all the slices of hamburger into a crossmark. */
+  #menuToggle input:checked~span {
+    opacity: 1;
+    transform:
+      translate(1px, -0.7px) rotate(45deg);
+    background: var(--color-primary);
+  }
+  
+  
+  
+  /* But let's hide the middle one. */
+  #menuToggle input:checked~span:nth-last-child(3) {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+  }
+  
+  /* Oh yeah and the last one should go the other direction */
+  #menuToggle input:checked~span:nth-last-child(2) {
+    transform: rotate(-45deg) translate(1px, 2px);
+  }
+  
+  
+  /* And let's slide it in from the left */
+  #menuToggle input:checked~ul {
+    transform: none;
+  }
